@@ -33,7 +33,7 @@ post '/new' do
 	
 	content = params[:content]
 
-	if @content.length <= 0
+	if content.length <= 0
 		@error = 'Type text'
 		return erb :new
 
