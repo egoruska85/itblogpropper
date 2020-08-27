@@ -29,7 +29,7 @@ end
 get '/new' do
 	erb :new 
 end	
-post '/new' do
+post '/new' do 
 	
 	content = params[:content]
 
@@ -38,7 +38,8 @@ post '/new' do
 		return erb :new
 
 	end
-	@db.execute 'insert into Posts(content, created_date) values (?, datetime())', [content]	  
+	@db.execute 'insert into Posts(content, created_date) values (?, datetime())', [content]
+	redirect '/'		  
 	erb "You typed #{content}"
 
 end
