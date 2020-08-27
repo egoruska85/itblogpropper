@@ -29,6 +29,14 @@ get '/new' do
 	erb :new 
 end	
 post '/new' do
+	init_db
 	@content = params[:content]
-	erb "You typed #{@content}"  	
+
+	if @content.length <= 0
+		@error = 'Type text'
+		return erb :new
+
+	end	
+	erb "You typed #{@content}"
+
 end
