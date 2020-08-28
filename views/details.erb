@@ -1,22 +1,47 @@
 <h4>
-	Post details
+	<%= @row['theme'] %>
 </h4>
 <p>
-	<%= @row['content']%>
+	Добавлено <%= @row['user'] %>
 	<br />
-	Added at <%= @row['created_date'] %>
+	<%= @row['created_date'] %>
+	<br />
+	<hr />
+	<p style="color: green">
+		<%= @row['content']%>
+	</p>
+	
+	
+
 	<br />
 	
 </p>
-<h4>
+<h4> 
 	<br />
-	Comments:	
+	Комментарии:	
 </h4>
+<br />
+<% @comments.each do |comment| %>
+	<p>
+		<h3 style="color: blue" ><%= comment['user'] %></h3>
+		<br />
+		<%= comment['content'] %>
+		<br />
+		<span style="font-size: 75%; color: red "> <%= comment['created_date'] %> </span>
+	</p>
+	<hr />
+
+<% end %>
+
 <p> 
 	<form action="/details/<%= @row['id']%>" method="post" role="form">
+		<div class="col-sm-20">
+      		<input  type="text" name="user" class="form-control" placeholder="Наберите имя">
+    	</div>
+    	<br /> 
   		<div class="form-group"> 
-  		<textarea name="content" class="form-control" rows="6" placeholder="Type comment text here"></textarea>
+  		<textarea name="content" class="form-control" rows="6" placeholder="наберите текст комментария"></textarea>
   		<br/>    	
-  		<button type="submit" class="btn btn-primary">Add comment</button>
+  		<button type="submit" class="btn btn-primary">ОТПРАВИТЬ</button>
 	</form>
 </p>

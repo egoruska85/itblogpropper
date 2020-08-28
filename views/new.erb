@@ -1,9 +1,17 @@
-<h2>Add new Posts</h2>
+<h2>Публикация новости</h2>
 <p> 
 	<form action="/new" method="post" role="form">
+		<div class="col-sm-20">
+      		<input  type="text" name="user" class="form-control" placeholder="Наберите имя">
+    	</div>
+    	<br />
+    	<div class="col-sm-20">
+      		<input  type="text" name="theme" class="form-control" placeholder="Наберите тему">
+    	</div>
+    	<br />
   		<div class="form-group"> 
-  		<textarea name="content" class="form-control" rows="6" placeholder="Type post text here"></textarea>
+  		<textarea name="content" class="form-control" rows="6" placeholder="Наберите текст новости"></textarea>
   		<br/>    	
-  		<button type="submit" class="btn btn-primary">Submit</button>
+  		<button type="submit" class="btn btn-primary">ГОТОВО</button>
 	</form>
 </p>

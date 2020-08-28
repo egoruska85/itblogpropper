@@ -17,12 +17,15 @@ configure do
 	@db.execute ' CREATE TABLE IF NOT EXISTS Posts 
 	(
 	  id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user TEXT,
+	theme TEXT,  
 	created_date DATE,
 	content TEXT
 )'
 		@db.execute ' CREATE TABLE IF NOT EXISTS Comments 
 	(
 	  id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user TEXT,  
 	created_date DATE,
 	content TEXT,
 	post_id INTEGER
@@ -39,14 +42,15 @@ end
 post '/new' do 
 	
 	content = params[:content]
-
+	user = params[:user]
+	theme = params[:theme]
 	if content.length <= 0
 		@error = 'Type text'
 		return erb :new
 
 	end
-	@db.execute 'insert into Posts(content, created_date) values (?, datetime())', [content]
-	redirect '/ '		  
+	@db.execute 'insert into Posts(user, theme, content, created_date) values (?, ?, ?, datetime())', [user, theme, content]
+	redirect to '/'		  
 	erb "You typed #{content}"
 
 end
@@ -58,25 +62,28 @@ get '/details/:post_id' do
 
 	@row = @results[0]
 
-	@comments = db.execute 'select * from Posts where post_id = ? order by id', [post_id]
+	@comments = @db.execute 'select * from Comments where post_id = ? order by id', [post_id]
 
 	erb :details  
 end
 post '/details/:post_id' do
 	post_id = params[:post_id]
 	content = params[:content]
+	user = params[:user]
 	@db.execute 'insert into Comments 
 	(
+		user,
 		content, 
 		created_date, 
 		post_id
 	) 
 		values 
 	(
+		?,
 		?, 	
 		datetime(),
 		?
-	)', [content, post_id]
+	)', [user, content, post_id]
 
 	redirect to ('details/' + post_id)
 

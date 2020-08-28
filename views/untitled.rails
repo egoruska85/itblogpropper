@@ -1,0 +1,18 @@
+<h2>
+					Новости
+					</h2>
+					<br />
+					<% @results.each do |post| %>
+					<p>
+						<h5><a href="/details/<%= post['id'] %>"><%= post['theme']%> </a></h5>
+					
+						<br />
+					<p style="font-size: 75%"> Добалено <%= post['created_date']%>
+						,
+						<%= post['user']%>
+					</p>
+					
+						
+					</p>
+					<hr />
+				<%end%>

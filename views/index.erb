@@ -1,15 +1,28 @@
-<h2>
-	Latest posts:
-</h2>
-<br />
-<% @results.each do |post| %>
-	<p>
-		<%= post['content']%>
-		<br />
-		Added at <%= post['created_date'] %>
-		<br />
-		<br />
-		<a href="/details/<%= post['id'] %>">Comments</a>	
-	</p>
-	<hr />
-<%end%>	
+<div class="parent">
+	<div class="child">
+		<div class="w-100 p-3">
+			<div class="shadow-lg p-3 mb-5 bg-white rounded">
+				<div class="w-100 p-3" style="background-color: #eee;">
+					<h2>
+						Новости
+					</h2>
+					<br />
+					<% @results.each do |post| %>
+						<p>
+							<h5 style="font-size: 100%"><a href="/details/<%= post['id'] %>"><%= post['theme']%> </a></h5>
+							
+							<br />
+							<p style="font-size: 75%"> Добалено <%= post['created_date']%>
+							,
+							<%= post['user']%>
+							</p>
+							
+								
+						</p>
+						<hr />
+					<%end%>
+				</div>	
+			</div>	
+		</div>	
+	</div>	
+</div>		
